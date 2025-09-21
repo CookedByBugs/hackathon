@@ -8,6 +8,8 @@ const Home = () => {
     <div className="w-full mx-auto">
       <div className="">
         <Hero />
+        <Cards />
+
       </div>
     </div>
   );
