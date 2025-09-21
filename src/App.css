@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+body {
+  background-color: #fff1f1;
+}
+
+.auth {
+  @apply bg-[#3B0270];
+}
+
+.bg-bar {
+  @apply bg-[#3B0270];
+}
+.text-bar {
+  @apply text-[#3B0270];
+}
+
+.btn-primary {
+  @apply bg-[#6F00FF]  hover:bg-[#3B0270] text-white py-1 rounded-xl transition-all duration-300;
+}
+
+.btn-auth {
+  @apply bg-[#6F00FF]  hover:bg-[#3B0270] text-white w-full py-2 rounded-xl transition-all duration-300;
+}
+
+.btn-danger {
+  @apply bg-red-700  hover:bg-red-800 text-white w-full py-1 rounded-xl transition-all duration-300;
+}
+
+.nav-link {
+  @apply text-gray-200 hover:text-white transition-all duration-200 select-none;
+}
+
+.mob-link {
+  @apply text-gray-200 focus:text-white block p-1 select-none text-lg;
+}
+
+.bg-secondary {
+  @apply bg-[#E9B3FB];
+}
+.bg-component {
+  @apply bg-[#E9B3FB] mt-10 outline-1 rounded-2xl min-h-[500px] p-3;
+}
+.btn-secondary {
+  @apply bg-[#E9B3FB] text-black text-xl hover:outline px-5 py-2 rounded font-medium select-none cursor-pointer transition-all duration-300;
+}
+.sider-link {
+  @apply hover:bg-[#E9B3FB] hover:text-black transition-all duration-150 my-2 block w-full text-start rounded-xl font-bold  p-3;
+}
