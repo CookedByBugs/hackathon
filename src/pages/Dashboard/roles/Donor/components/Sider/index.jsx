@@ -3,6 +3,7 @@ import {
   BarChartOutlined,
   BookOutlined,
   CloseOutlined,
+  DollarCircleOutlined,
   FileAddOutlined,
   FileOutlined,
   FlagOutlined,
@@ -61,6 +62,14 @@ const Sider = () => {
           }`}
         >
           <FlagOutlined className="text-xl" /> On Going Campaigns
+        </Link>
+        <Link
+          to={"/dashboard/donations"}
+          className={`sider-link ${
+            currentTab == "donations" ? "bg-secondary text-black" : "text-white"
+          }`}
+        >
+          <DollarCircleOutlined className="text-xl" /> Donations
         </Link>
       </div>
     </div>
