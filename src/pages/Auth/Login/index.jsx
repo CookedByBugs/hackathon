@@ -42,12 +42,12 @@ const Login = () => {
       .then((res) => {
         console.log(res.data);
         localStorage.setItem("authToken", res.data.token);
+        if (res.data) navigate("/");
       })
       .catch((error) => {
         console.error(error);
       });
   };
-  if (isAuth) navigate("/");
 
   return (
     <div className="min-h-screen auth p-3 flex justify-center items-center">
