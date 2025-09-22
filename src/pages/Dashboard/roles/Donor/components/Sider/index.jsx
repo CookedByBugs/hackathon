@@ -1,76 +1,86 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   BarChartOutlined,
-  BookOutlined,
   CloseOutlined,
   DollarCircleOutlined,
-  FileAddOutlined,
-  FileOutlined,
   FlagOutlined,
   HomeFilled,
-  LockOutlined,
   MenuOutlined,
-  TeamOutlined,
-  UserOutlined,
 } from "@ant-design/icons";
 import { useTabContext } from "../../../../../../contexts/Tab/TabContext";
 import { Link } from "react-router-dom";
+
 const Sider = () => {
   const { siderOpen, setSiderOpen, currentTab } = useTabContext();
+
+  const navLinks = [
+    {
+      to: "/dashboard",
+      label: "Dashboard",
+      icon: <BarChartOutlined className="text-lg" />,
+      tab: "Dashboard",
+    },
+    {
+      to: "/dashboard/on-going",
+      label: "On Going Campaigns",
+      icon: <FlagOutlined className="text-lg" />,
+      tab: "onGoingCampaigns",
+    },
+    {
+      to: "/dashboard/donations",
+      label: "Donations",
+      icon: <DollarCircleOutlined className="text-lg" />,
+      tab: "donations",
+    },
+  ];
+
   return (
     <div
-      className={`bg-bar rounded-e-4xl z-50 fixed top-0 bottom-0 left-0 min-h-screen md:max-w-[350px] max-w-[300px] text-white transition-all duration-300 ${
-        siderOpen ? "w-full" : "w-0"
-      }`}
+      className={`fixed top-0 bottom-0 left-0 z-50 min-h-screen bg-bar text-white rounded-e-3xl shadow-lg transition-all duration-300 
+        ${siderOpen ? "w-64" : "w-0"} overflow-hidden`}
     >
       <div
-        className={`mx-auto ${
-          siderOpen ? "p-2" : "p-2 overflow-hidden opacity-0"
+        className={`transition-opacity duration-300 ${
+          siderOpen ? "opacity-100" : "opacity-0"
         }`}
       >
-        <div className="flex justify-between items-center">
+        {/* Header */}
+        <div className="flex justify-between items-center px-4 py-3 border-b border-white/20">
           <button
-            title={siderOpen ? "Close Sider" : "Open sider"}
+            title={siderOpen ? "Close Menu" : "Open Menu"}
             onClick={() => setSiderOpen(!siderOpen)}
-            className={`w-[50px] my-2 block p-3 rounded text-xl transition-all duration-300 ${
-              siderOpen ? "bg-secondary text-black " : "bg-bar ms-2.5"
-            }`}
+            className="p-2 rounded bg-secondary text-black hover:scale-105 transition-transform"
           >
-            {!siderOpen ? <MenuOutlined /> : <CloseOutlined />}
+            {siderOpen ? <CloseOutlined /> : <MenuOutlined />}
           </button>
+
           <Link
-            to={"/"}
+            to="/"
             title="Home"
-            className={`w-[50px] bg-secondary text-black my-2 block p-3 text-center rounded text-xl transition-all duration-300`}
+            className="p-2 rounded bg-secondary text-black hover:scale-105 transition-transform"
           >
             <HomeFilled />
           </Link>
         </div>
-        <Link
-          to={"/dashboard"}
-          className={`sider-link ${
-            currentTab == "Dashboard" ? "bg-secondary text-black" : "text-white"
-          }`}
-        >
-          <BarChartOutlined className="text-xl" />
-          Dashboard
-        </Link>
-        <Link
-          to={"/dashboard/on-going"}
-          className={`sider-link ${
-            currentTab == "campaign" ? "bg-secondary text-black" : "text-white"
-          }`}
-        >
-          <FlagOutlined className="text-xl" /> On Going Campaigns
-        </Link>
-        <Link
-          to={"/dashboard/donations"}
-          className={`sider-link ${
-            currentTab == "donations" ? "bg-secondary text-black" : "text-white"
-          }`}
-        >
-          <DollarCircleOutlined className="text-xl" /> Donations
-        </Link>
+
+        {/* Nav Links */}
+        <nav className="mt-4 flex flex-col gap-2">
+          {navLinks.map((link, idx) => (
+            <Link
+              key={idx}
+              to={link.to}
+              className={`flex items-center gap-3 px-5 py-3 rounded-lg mx-3 transition-all duration-200
+                ${
+                  currentTab === link.tab
+                    ? "bg-secondary text-black font-semibold"
+                    : "hover:bg-white/10 text-white"
+                }`}
+            >
+              {link.icon}
+              <span>{link.label}</span>
+            </Link>
+          ))}
+        </nav>
       </div>
     </div>
   );

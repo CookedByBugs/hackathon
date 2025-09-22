@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Cards = () => {
   const [campaigns, setCampaigns] = useState([]);
 
   const getCampaigns = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/campaign/get");
+      const res = await axios.get("http://localhost:8000/api/campaign/get-public");
       setCampaigns(res.data);
     } catch (err) {
       console.error(err);
@@ -70,9 +71,15 @@ const Cards = () => {
 
               {/* Spacer + Button */}
               <div className="mt-auto pt-4">
-                <button className="w-full btn-primary !py-2 font-semibold rounded-xl shadow hover:scale-105 transition">
-                  Donate Now
-                </button>
+                {c.raisedAmount >= c.goalAmount ? (
+                  <span className="w-full text-center py-2 bg-gray-400 text-white font-semibold rounded-xl block">
+                    Closed
+                  </span>
+                ) : (
+                  <Link to="/dashboard/on-going"  className="block text-center w-full btn-primary !py-2 font-semibold rounded-xl shadow hover:scale-105 transition">
+                    View {">>"}
+                  </Link>
+                )}
               </div>
             </div>
           </div>

@@ -9,16 +9,24 @@ import {
   Book,
   Stethoscope,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useTabContext } from "../../../../../../contexts/Tab/TabContext";
 
 const Home = () => {
+  const navigate = useNavigate();
   const { user } = useAuthContext();
   const [campaigns, setCampaigns] = useState([]);
   const [donations, setDonations] = useState([]);
-
+  const { changeTab } = useTabContext();
   // 👉 Fetch campaigns
+  useEffect(() => {
+    changeTab("Dashboard");
+  }, []);
   const getCampaigns = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/campaign/get");
+      const res = await axios.get(
+        "http://localhost:8000/api/campaign/get-public"
+      );
       setCampaigns(res.data);
     } catch (error) {
       console.error("Failed to fetch campaigns:", error);
@@ -124,8 +132,11 @@ const Home = () => {
                   Closed
                 </span>
               ) : (
-                <button className="w-full bg-bar text-white py-2 rounded-lg hover:bg-bar/90 transition">
-                  Donate
+                <button
+                  onClick={() => navigate("/dashboard/on-going")}
+                  className="w-full bg-bar text-white py-2 rounded-lg hover:bg-bar/90 transition"
+                >
+                  Donate {">>"}
                 </button>
               )}
             </div>

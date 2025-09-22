@@ -3,12 +3,16 @@ import axios from "axios";
 import { useAuthContext } from "../../../../../../contexts/Auth/AuthContext";
 import { Droplet, Book, Stethoscope } from "lucide-react";
 import { message, Spin, Progress } from "antd";
+import { useTabContext } from "../../../../../../contexts/Tab/TabContext";
 
 const Donations = () => {
   const { user } = useAuthContext();
   const [donations, setDonations] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const { changeTab } = useTabContext();
+  useEffect(() => {
+    changeTab("donations");
+  }, []);
   const getDonations = async () => {
     if (!user?._id) return;
 

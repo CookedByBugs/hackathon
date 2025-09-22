@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Modal, Input, message } from "antd";
 import axios from "axios";
 import { useAuthContext } from "../../../../../../contexts/Auth/AuthContext";
+import { useTabContext } from "../../../../../../contexts/Tab/TabContext";
 
 const OngoingCampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
@@ -9,10 +10,16 @@ const OngoingCampaigns = () => {
   const [selectedCampaign, setSelectedCampaign] = useState(null);
   const [amount, setAmount] = useState("");
   const { user } = useAuthContext();
+  const { changeTab } = useTabContext();
+  useEffect(() => {
+    changeTab("onGoingCampaigns");
+  }, [changeTab]);
   // 👉 Fetch campaigns
   const getCampaigns = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/campaign/get");
+      const res = await axios.get(
+        "http://localhost:8000/api/campaign/get-public"
+      );
       setCampaigns(res.data);
     } catch (error) {
       console.error(error);

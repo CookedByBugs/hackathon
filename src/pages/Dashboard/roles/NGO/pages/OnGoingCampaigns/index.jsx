@@ -15,7 +15,11 @@ const OnGoingCampaigns = () => {
 
   const getCampaign = async () => {
     await axios
-      .get("http://localhost:8000/api/campaign/get")
+      .get("http://localhost:8000/api/campaign/get", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+      })
       .then((res) => {
         setCampaign(res.data);
       })
@@ -30,11 +34,11 @@ const OnGoingCampaigns = () => {
 
   return (
     <div className="w-[95%] mx-auto">
-      <div className="mt-10">
+      <div className="mt-30">
         <h2 className="text-4xl font-bold text-center text-bar mb-8">
-          🌍 On Going Campaigns
+          On Going Campaigns
         </h2>
-        <div className="bg-secondary p-6 rounded-3xl shadow-lg">
+        <div className="bg-secondary !min-h-[300px] p-6 rounded-3xl shadow-lg">
           <Row gutter={[24, 24]}>
             {campaign.map((item) => {
               const progress =

@@ -46,8 +46,8 @@ const Login = () => {
       .catch((error) => {
         console.error(error);
       });
-    if (isAuth) navigate("/");
   };
+  if (isAuth) navigate("/");
 
   return (
     <div className="min-h-screen auth p-3 flex justify-center items-center">
