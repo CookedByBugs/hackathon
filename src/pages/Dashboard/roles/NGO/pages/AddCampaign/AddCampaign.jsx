@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTabContext } from "../../../../../../contexts/Tab/TabContext";
 import { useAuthContext } from "../../../../../../contexts/Auth/AuthContext";
-import { Col, Form, Input, Row, Select } from "antd";
+import { Col, Form, Input, message, Row, Select } from "antd";
 import axios from "axios";
 
 const initialState = {
@@ -36,11 +36,11 @@ const AddCampaign = () => {
     goalAmount = goalAmount.toString().trim();
 
     if (!title || !description || !goalAmount || !categoryOption) {
-      return alert("All fields are required");
+      return message.error("All fields are required");
     }
 
     if (isNaN(goalAmount) || Number(goalAmount) <= 0) {
-      return alert("Goal amount must be a positive number");
+      return message.error("Goal amount must be a positive number");
     }
 
     const formData = {
