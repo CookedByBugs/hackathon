@@ -5,6 +5,7 @@ import {
   CloseOutlined,
   FileAddOutlined,
   FileOutlined,
+  FlagOutlined,
   HomeFilled,
   LockOutlined,
   MenuOutlined,
@@ -56,18 +57,20 @@ const Sider = () => {
         <Link
           to={"/dashboard/new-notes"}
           className={`sider-link ${
-            currentTab == "New_Notes" ? "bg-secondary text-black" : "text-white"
+            currentTab == "campaign" ? "bg-secondary text-black" : "text-white"
           }`}
         >
-          <FileAddOutlined className="text-xl" /> New Notes
+          <FlagOutlined className="text-xl" /> On Going Campaigns
         </Link>
         <Link
           to={"/dashboard/all-notes"}
           className={`sider-link ${
-            currentTab == "All_Notes" ? "bg-secondary text-black" : "text-white"
+            currentTab == "My Donations"
+              ? "bg-secondary text-black"
+              : "text-white"
           }`}
         >
-          <FileOutlined className="text-xl" /> All Notes
+          <FileOutlined className="text-xl" /> 
         </Link>
       </div>
     </div>
