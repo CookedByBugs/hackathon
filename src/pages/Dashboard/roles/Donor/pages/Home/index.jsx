@@ -31,7 +31,12 @@ const Home = () => {
 
     try {
       const res = await axios.get(
-        `http://localhost:8000/api/donations/donor/${user._id}`
+        `http://localhost:8000/api/donations/donor/${user._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+        }
       );
       setDonations(res.data);
     } catch (error) {
@@ -133,21 +138,24 @@ const Home = () => {
         <h2 className="text-xl font-bold mb-4">Your Recent Donations</h2>
         <div className="bg-white shadow-md rounded-2xl p-4">
           <ul className="space-y-3 text-sm">
-            {donations.map((d) => (
-              <li key={d._id} className="flex justify-between items-center">
-                <div className="flex items-center gap-2">
-                  {d.campaignId.category === "Health" ? (
-                    <Stethoscope className="w-4 h-4 text-green-500" />
-                  ) : d.campaignId.category === "Education" ? (
-                    <Book className="w-4 h-4 text-yellow-500" />
-                  ) : (
-                    <Droplet className="w-4 h-4 text-blue-500" />
-                  )}
-                  <span>{d.campaignId.title}</span>
-                </div>
-                <span className="font-bold text-bar">${d.amount}</span>
-              </li>
-            ))}
+            {donations
+              .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+              .slice(0, 3)
+              .map((d) => (
+                <li key={d._id} className="flex justify-between items-center">
+                  <div className="flex items-center gap-2">
+                    {d.campaignId.category === "Health" ? (
+                      <Stethoscope className="w-4 h-4 text-green-500" />
+                    ) : d.campaignId.category === "Education" ? (
+                      <Book className="w-4 h-4 text-yellow-500" />
+                    ) : (
+                      <Droplet className="w-4 h-4 text-blue-500" />
+                    )}
+                    <span>{d.campaignId.title}</span>
+                  </div>
+                  <span className="font-bold text-bar">${d.amount}</span>
+                </li>
+              ))}
           </ul>
         </div>
       </section>

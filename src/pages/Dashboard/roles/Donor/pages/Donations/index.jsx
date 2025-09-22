@@ -109,7 +109,7 @@ const Donations = () => {
                     }`}
                   >
                     {campaign.raisedAmount >= campaign.goalAmount
-                      ? "Closed"
+                      ? "Payment Completed"
                       : "Ongoing"}
                   </span>
                 </div>
