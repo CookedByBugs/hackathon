@@ -55,22 +55,12 @@ const Sider = () => {
           Dashboard
         </Link>
         <Link
-          to={"/dashboard/new-notes"}
+          to={"/dashboard/on-going"}
           className={`sider-link ${
             currentTab == "campaign" ? "bg-secondary text-black" : "text-white"
           }`}
         >
           <FlagOutlined className="text-xl" /> On Going Campaigns
-        </Link>
-        <Link
-          to={"/dashboard/all-notes"}
-          className={`sider-link ${
-            currentTab == "My Donations"
-              ? "bg-secondary text-black"
-              : "text-white"
-          }`}
-        >
-          <FileOutlined className="text-xl" /> 
         </Link>
       </div>
     </div>
